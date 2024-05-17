@@ -1,0 +1,76 @@
+* {
+    z-index: 1;
+}
+
+body {
+    background-color: black;
+    font-family: Noto Sans, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    width: 100svw;
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0;
+    padding: 0;
+}
+
+#bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    width: 100svw;
+    height: 100vh;
+    height: 100svh;
+    background-image: url("https://raw.githubusercontent.com/Creators-of-Create/Create/d66170c8fed5d02ad46f44fd0e66685be88a3170/src/main/resources/assets/create/textures/item/polished_rose_quartz.png?copyright_year=2019&copyright_name=simibubi&license=mit");
+    background-size: cover;
+    background-position: center;
+    filter: blur(20vw);
+    filter: blur(20vmax);
+    z-index: 0;
+}
+
+#body {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.card {
+    display: none; /* js will pick one to show */
+    align-self: center;
+    box-sizing: border-box;
+    width: fit-content;
+    max-width: min(calc(100vw - 16px), 600px);
+    max-width: min(calc(100svw - 16px), 600px);
+    height: fit-content;
+    padding: 16px;
+    border-radius: 2px;
+    background-color: #fffd;
+}
+
+h2 {
+    margin-top: 8px;
+}
+
+.nowrap {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+input {
+    width: 160px;
+}
+
+address {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+address * {
+    color: #fff8;
+}
