@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-CA">
     <head>
         <meta charset="utf-8" />
@@ -17,7 +17,10 @@
         <script>
             const hostname = location.hostname.split(".");
             const prefix = hostname.slice(0, -2).join(".");
-            const goto = localStorage.getItem(prefix);
+            const goto =
+                Object.fromEntries(
+                    document.cookie.split("; ").map(c => c.split("="))
+                )[prefix] ?? null;
             const path = location.pathname;
 
             if (hostname.length == 2 && path != "/") {
@@ -52,6 +55,9 @@
     <body>
         <div id="bg"></div>
         <div id="body">
+            <noscript class="card" style="display: block"
+                >JavaScript is required</noscript
+            >
             <div class="card main">
                 <h2>Locaite.net</h2>
                 <p><strong>Seamlessly Share Local Dev Links</strong></p>
@@ -127,14 +133,9 @@
                     Where do you want this link to redirect to?
                 </p>
                 <p class="nowrap">
-                    <input
-                        class="goto"
-                        placeholder="http://test.test:8080"
-                        type="text"
-                        pattern="^(?=.*:\/\/)(?!.*\/$)(?!.*locaite\.net$).*"
-                        title="The value must contain '://' and not end with a slash or 'locaite.net'"
-                        autofocus
-                    /><span id="path"></span>
+                    <input class="goto" type="text" autofocus /><span
+                        id="path"
+                    ></span>
                 </p>
                 <p style="text-align: right; margin-bottom: 4px">
                     <button>Save and continue</button>

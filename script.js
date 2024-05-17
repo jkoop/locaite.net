@@ -1,12 +1,12 @@
-
 function updatePrefixesTable() {
     const tbody = document.getElementById("prefixes");
-    const prefixes = { ...localStorage };
+    const prefixes = Object.fromEntries(document.cookie.split('; ').map(c => c.split('=')));
 
     tbody.innerHTML = "";
 
-    for (const [key, value] of Object.entries(prefixes)) {
-        console.log(`${key}: ${value}`);
+    for (const [key, value1] of Object.entries(prefixes)) {
+        if (key == "") continue;
+        value = decodeURIComponent(value1);
 
         const row = document.createElement("tr");
         const prefix = document.createElement("td");
@@ -34,7 +34,15 @@ function updatePrefixesTable() {
 
 function clearPrefixes() {
     if (confirm("Really clear all prefixes?")) {
-        localStorage.clear();
+        const cookies = document.cookie.split(";");
+
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i];
+            const eqPos = cookie.indexOf("=");
+            const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+            document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;domain=.locaite.net;path=/`;
+        }
+
         updatePrefixesTable();
     }
 }
@@ -45,7 +53,7 @@ function clearPrefix(button) {
         .querySelector("td").innerText;
 
     if (confirm(`Really clear prefix "${prefix}"?`)) {
-        localStorage.removeItem(prefix);
+        document.cookie = `${prefix}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;domain=.locaite.net;path=/`;
         updatePrefixesTable();
     }
 }
@@ -55,10 +63,20 @@ function save(event) {
     event.stopImmediatePropagation();
     event.stopPropagation();
 
-    const goto = event.target.querySelector("input.goto").value;
+    const goto = event.target.querySelector("input.goto").value.trim();
     if (goto.length == 0) return;
 
-    localStorage.setItem(prefix, goto);
+    if (
+        !/^[a-z0-9-]+:\/\//.test(goto) ||
+        goto.slice(-1) == "/" ||
+        goto.indexOf("locaite.net") >= 0
+    ) {
+        alert("Must start with letters, numbers, or dashes, followed by '://', not contain 'locaite.net', and not end with a slash");
+        return;
+    }
+
+    const dateString = new Date((new Date).getFullYear() + 100 + "").toUTCString();
+    document.cookie = `${prefix}=${encodeURIComponent(goto)};expires=${dateString};domain=.locaite.net;path=/`;
     location.href =
         goto + location.href.slice(location.origin.length);
 }
@@ -73,6 +91,7 @@ function hashChange() {
 if (prefix.length == 0) {
     document.querySelector("div.card.main").style.display = "block";
     updatePrefixesTable();
+    setInterval(updatePrefixesTable, 5000);
 
     hashChange();
     window.addEventListener("hashchange", hashChange);
