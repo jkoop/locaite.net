@@ -17,10 +17,11 @@
     <script>
       const hostname = location.hostname.split(".");
       const prefix = hostname.slice(0, -2).join(".");
-      const goto =
+      const goto = decodeURIComponent(
         Object.fromEntries(
           document.cookie.split("; ").map((c) => c.split("=")),
-        )[prefix] ?? null;
+        )[prefix] ?? "",
+      );
       const path = location.pathname;
 
       if (hostname.length == 2 && path != "/") {
@@ -31,7 +32,7 @@
         location.href = "//" + hostname.slice(-2).join(".");
       }
 
-      if (prefix.length > 0 && goto != null) {
+      if (prefix.length > 0 && goto != "") {
         location.href = goto + location.href.slice(location.origin.length);
       }
     </script>
