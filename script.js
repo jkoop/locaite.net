@@ -129,7 +129,7 @@ function copyLocaiteLink(button) {
 function copyLocaiteLinkAsMarkdown(button) {
   const row = button.closest("div");
   const url = row.querySelector(".ellipsis").innerText;
-  const text = url.replace("https://", "L⃰//").replace(".locaite.net", "");
+  const text = url.replace("https://", "//").replace(".locaite.net", "");
   navigator.clipboard.writeText(`[${me(text)}](${me(url)})`);
 
   button.style.border = "none";

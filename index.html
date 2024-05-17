@@ -69,47 +69,27 @@
 
           <h3>Seamlessly share local dev links</h3>
           <p>
-            Locaite.net is the perfect solution for web developers looking to
-            effortlessly share links to their local development environments,
-            even if they use different domains and ports.
+            Locaite.net is a tool designed for web developers to facilitate
+            sharing links to pages on each other's local development
+            environments, even when they use different local domains and ports.
+            This is achieved by replacing the domain name and port of a local
+            address with a custom prefix followed by ".locaite.net". The chosen
+            prefix should be concise and representative of the project name.
           </p>
 
-          <h3>How it works:</h3>
-          <ol>
-            <li>
-              <strong>Replace the Domain</strong>: Take the local address to
-              your page, like
-              <code>http://localhost:3000/<wbr />project/<wbr />page</code>.
-            </li>
-            <li>
-              <strong>Use a Custom Prefix</strong>: Replace the domain and port
-              with a custom prefix and <code>.locaite.net</code>, such as
-              <code
-                >http://myproject.locaite.net/<wbr />project/<wbr />page</code
-              >.
-            </li>
-            <li>
-              <strong>Easy Setup</strong>: The recipient configures Locaite.net
-              once, mapping the prefix to their local setup.
-            </li>
-          </ol>
-
-          <h3>Why Locaite.net?</h3>
-          <ul>
-            <li>
-              <strong>Streamline Collaboration</strong>: No more manual
-              adjustments to domain names and ports.
-            </li>
-            <li id="privacy">
-              <strong>Privacy First</strong>: No data is stored by Locaite.net.
-            </li>
-            <li>
-              <strong>Developer Friendly</strong>: Quick, simple, and efficient.
-            </li>
-          </ul>
           <p>
-            Experience hassle-free link sharing with Locaite.net. Configure
-            once, and you&#39;re set for smooth collaboration!
+            When another developer receives such a link and clicks on it, they
+            are redirected to the corresponding page on their own local
+            development site, assuming they have pre-configured Locaite.net
+            appropriately. The configuration process is a one-time setup, and
+            <span id="privacy">no data is stored by Locaite.net</span>, ensuring
+            privacy and security in the development workflow.
+          </p>
+
+          <p>
+            This system streamlines collaboration among developers by providing
+            a consistent method for accessing local resources without the need
+            for manual adjustments to domain names and ports.
           </p>
         </details>
 
@@ -156,7 +136,7 @@
             id="prefix"
           ></code
           >" yet.<br />
-          Where do you want this link to redirect to?
+          Where do you want this link to redirect to for this web browser?
         </p>
         <p class="nowrap">
           <input id="goto" type="text" autofocus /><span id="path"></span>
