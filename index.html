@@ -15,7 +15,7 @@
     <title>Locaite.net</title>
 
     <script>
-      const hostname = location.hostname.split(".");
+      const hostname = location.hostname.toLowerCase().split(".");
       const prefix = hostname.slice(0, -2).join(".");
       const goto = decodeURIComponent(
         Object.fromEntries(
@@ -33,7 +33,7 @@
       }
 
       if (prefix.length > 0 && goto != "") {
-        location.href = goto + location.href.slice(location.origin.length);
+        location.href = goto + location.href.slice(location.origin.length + 1);
       }
     </script>
 
@@ -44,7 +44,7 @@
 
     <link
       rel="icon"
-      href="https://raw.githubusercontent.com/Creators-of-Create/Create/d66170c8fed5d02ad46f44fd0e66685be88a3170/src/main/resources/assets/create/textures/item/polished_rose_quartz.png?copyright_year=2019&copyright_name=simibubi&license=mit"
+      href="https://raw.githubusercontent.com/Creators-of-Create/Create/d66170c8fed5d02ad46f44fd0e66685be88a3170/src/main/resources/assets/create/textures/item/polished_rose_quartz.png?_=copyright_2019_simibubi_mit_license"
     />
 
     <link
@@ -62,49 +62,72 @@
       <noscript class="card" style="display: block"
         >JavaScript is required</noscript
       >
+
       <div class="card main">
-        <h2>Locaite.net</h2>
-        <p><strong>Seamlessly Share Local Dev Links</strong></p>
-        <p>
-          Locaite.net is the perfect solution for web developers looking to
-          effortlessly share links to their local development environments, even
-          if they use different domains and ports.
-        </p>
-        <p><strong>How It Works:</strong></p>
-        <ol>
-          <li>
-            <strong>Replace the Domain</strong>: Take the local address to your
-            page, like
-            <code>http://localhost:3000/<wbr />project/<wbr />page</code>.
-          </li>
-          <li>
-            <strong>Use a Custom Prefix</strong>: Replace the domain and port
-            with a custom prefix and <code>.locaite.net</code>, such as
-            <code>http://myproject.locaite.net/<wbr />project/<wbr />page</code
-            >.
-          </li>
-          <li>
-            <strong>Easy Setup</strong>: The recipient configures Locaite.net
-            once, mapping the prefix to their local setup.
-          </li>
-        </ol>
-        <p><strong>Why Locaite.net?</strong></p>
-        <ul>
-          <li>
-            <strong>Streamline Collaboration</strong>: No more manual
-            adjustments to domain names and ports.
-          </li>
-          <li id="privacy">
-            <strong>Privacy First</strong>: No data is stored by Locaite.net.
-          </li>
-          <li>
-            <strong>Developer Friendly</strong>: Quick, simple, and efficient.
-          </li>
-        </ul>
-        <p>
-          Experience hassle-free link sharing with Locaite.net. Configure once,
-          and you&#39;re set for smooth collaboration!
-        </p>
+        <details open>
+          <summary><h2 style="display: inline">Locaite.net</h2></summary>
+
+          <h3>Seamlessly share local dev links</h3>
+          <p>
+            Locaite.net is the perfect solution for web developers looking to
+            effortlessly share links to their local development environments,
+            even if they use different domains and ports.
+          </p>
+
+          <h3>How it works:</h3>
+          <ol>
+            <li>
+              <strong>Replace the Domain</strong>: Take the local address to
+              your page, like
+              <code>http://localhost:3000/<wbr />project/<wbr />page</code>.
+            </li>
+            <li>
+              <strong>Use a Custom Prefix</strong>: Replace the domain and port
+              with a custom prefix and <code>.locaite.net</code>, such as
+              <code
+                >http://myproject.locaite.net/<wbr />project/<wbr />page</code
+              >.
+            </li>
+            <li>
+              <strong>Easy Setup</strong>: The recipient configures Locaite.net
+              once, mapping the prefix to their local setup.
+            </li>
+          </ol>
+
+          <h3>Why Locaite.net?</h3>
+          <ul>
+            <li>
+              <strong>Streamline Collaboration</strong>: No more manual
+              adjustments to domain names and ports.
+            </li>
+            <li id="privacy">
+              <strong>Privacy First</strong>: No data is stored by Locaite.net.
+            </li>
+            <li>
+              <strong>Developer Friendly</strong>: Quick, simple, and efficient.
+            </li>
+          </ul>
+          <p>
+            Experience hassle-free link sharing with Locaite.net. Configure
+            once, and you&#39;re set for smooth collaboration!
+          </p>
+        </details>
+
+        <h3>Convert link</h3>
+        <div class="locaite-link">
+          <small class="nowrap"
+            ><label for="localLink">Local link:</label></small
+          >
+          <input
+            style="flex-grow: 1"
+            id="localLink"
+            type="url"
+            placeholder="http://localhost:8080/path/to/thing?query=something#and-a-fragment"
+            oninput="fromLocalLink(this)"
+            onkeydown="copyDefaultLocaiteLink(event)"
+          />
+        </div>
+        <div id="locaiteLinks"></div>
 
         <h3>
           Your prefixes
@@ -114,14 +137,19 @@
           <thead>
             <tr>
               <th>Prefix</th>
-              <th colspan="2">Target</th>
+              <th>Target</th>
+              <th></th>
             </tr>
           </thead>
           <tbody id="prefixes"></tbody>
         </table>
+
+        <form id="savePrefixForm" onsubmit="savePrefix(event)"></form>
       </div>
 
       <form class="card redirect" onsubmit="save(event)">
+        <a href="https://locaite.net">← Home</a>
+
         <h2>Not configured</h2>
         <p>
           It looks like you haven't configured the prefix "<code
@@ -131,12 +159,13 @@
           Where do you want this link to redirect to?
         </p>
         <p class="nowrap">
-          <input class="goto" type="text" autofocus /><span id="path"></span>
+          <input id="goto" type="text" autofocus /><span id="path"></span>
         </p>
-        <p style="text-align: right; margin-bottom: 4px">
+        <p style="margin-bottom: 4px">
           <button>Save and continue</button>
         </p>
       </form>
+
       <address>
         <span
           >Locaite &copy; 2024

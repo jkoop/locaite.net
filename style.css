@@ -27,7 +27,7 @@ body {
   width: 100svw;
   height: 100vh;
   height: 100svh;
-  background-image: url("https://raw.githubusercontent.com/Creators-of-Create/Create/d66170c8fed5d02ad46f44fd0e66685be88a3170/src/main/resources/assets/create/textures/item/polished_rose_quartz.png?copyright_year=2019&copyright_name=simibubi&license=mit");
+  background-image: url("https://raw.githubusercontent.com/Creators-of-Create/Create/d66170c8fed5d02ad46f44fd0e66685be88a3170/src/main/resources/assets/create/textures/item/polished_rose_quartz.png?_=copyright_2019_simibubi_mit_license");
   background-size: cover;
   background-position: center;
   filter: blur(20vw);
@@ -50,7 +50,7 @@ body {
   height: fit-content;
   padding: 16px;
   border-radius: 2px;
-  background-color: #fffd;
+  background-color: #fff;
 }
 
 h2 {
@@ -61,6 +61,12 @@ h2 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+details[open] {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid black;
 }
 
 input {
@@ -75,4 +81,25 @@ address {
 
 address * {
   color: #fff8;
+}
+
+#savePrefixForm {
+  display: none;
+}
+
+.locaite-link {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.text-red {
+  color: red;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
