@@ -41,7 +41,6 @@ body {
 }
 
 .card {
-  display: none; /* js will pick one to show */
   align-self: center;
   box-sizing: border-box;
   width: fit-content;
@@ -157,9 +156,13 @@ address * {
 }
 
 .at {
-  background-color: #a00;
-  color: white;
+  background-color: #ddd;
   border-radius: 4px;
   padding: 1px 2px;
   margin: -1px -2px;
+}
+
+.at-red {
+  background-color: #a00;
+  color: white;
 }

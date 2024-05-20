@@ -14,30 +14,6 @@
 
     <title>Locaite.net</title>
 
-    <script>
-      const hostname = location.hostname.toLowerCase().split(".");
-      const prefix = hostname.slice(0, -2).join(".");
-      const goto = decodeURIComponent(
-        Object.fromEntries(
-          document.cookie.split("; ").map((c) => c.split("=")),
-        )[prefix] ?? "",
-      );
-      const path = location.pathname;
-
-      if (hostname.length == 2 && path != "/") {
-        location.pathname = "/";
-      }
-
-      if (prefix == "static") {
-        location.href = "//" + hostname.slice(-2).join(".");
-      }
-
-      if (prefix.length > 0 && goto != "") {
-        location.href = goto + location.href.slice(location.origin.length + 1);
-      }
-    </script>
-
-    <link rel="preconnect" href="https://static.locaite.net" />
     <link rel="preconnect" href="https://raw.githubusercontent.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,17 +29,17 @@
     />
     <link
       rel="stylesheet"
-      href="https://static.locaite.net/style.min.css?v=STYLE_HASH"
+      href="https://locaite.net/style.min.css?v=STYLE_HASH"
     />
+
+    <script src="https://locaite.net/script.min.js?v=SCRIPT_HASH"></script>
   </head>
   <body>
     <div id="bg"></div>
     <div id="body">
-      <noscript class="card" style="display: block"
-        >JavaScript is required</noscript
-      >
+      <noscript class="card">JavaScript is required</noscript>
 
-      <div class="card main">
+      <div class="card">
         <details open>
           <summary><h2 style="display: inline">Locaite.net</h2></summary>
 
@@ -74,10 +50,11 @@
             <div class="chat-left">
               <div class="chat-author">Project Manager</div>
               <div class="chat-message">
-                <p><span class="at">@everyone</span></p>
+                <p><span class="at at-red">@everyone</span></p>
                 <p>
                   We've finally added that setting that you've always wanted.
-                  Thanks to Jeff, you can find it in the very big settings page.
+                  Thanks to <span class="at">@brendan</span>, you can find it in
+                  the very big settings page.
                 </p>
                 <p>
                   Dan, the link to your local site is
@@ -149,26 +126,6 @@
         <form id="savePrefixForm" onsubmit="savePrefix(event)"></form>
       </div>
 
-      <form class="card redirect" onsubmit="save(event)">
-        <a href="https://locaite.net">← Home</a>
-
-        <h2>Not configured</h2>
-        <p>
-          The link that you clicked on is intended to redirect to your local
-          development site for the project "<code id="prefix"></code>".
-        </p>
-        <p>
-          Where do you want your browser to redirect you too? You can always
-          change this later.
-        </p>
-        <p class="nowrap">
-          <input id="goto" type="text" autofocus /><span id="path"></span>
-        </p>
-        <p style="margin-bottom: 4px">
-          <button>Save and continue</button>
-        </p>
-      </form>
-
       <address>
         <span
           ><a target="_blank" href="https://github.com/jkoop/locaite.net"
@@ -183,6 +140,24 @@
       </address>
     </div>
 
-    <script src="https://static.locaite.net/script.min.js?v=SCRIPT_HASH"></script>
+    <script>
+      updatePrefixesTable();
+      setInterval(updatePrefixesTable, 5000);
+
+      if (localStorage.openDetails === "false") {
+        document.querySelector("details").open = false;
+        document.getElementById("localLink").focus();
+      }
+
+      document
+        .querySelector("details")
+        .addEventListener(
+          "toggle",
+          (event) => (localStorage.openDetails = event.target.open.toString()),
+        );
+
+      hashChange();
+      window.addEventListener("hashchange", hashChange);
+    </script>
   </body>
 </html>

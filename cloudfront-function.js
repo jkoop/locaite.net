@@ -5,9 +5,10 @@ function handler(event) {
 
   const hostPieces = request.headers.host.value.split(".");
 
-  // if host doesn't match "static.*.*"
-  if (hostPieces.length != 3 || hostPieces[0] != "static") {
+  if (hostPieces.length == 2 && request.uri == "/") {
     request.uri = "/index.min.html";
+  } else if (hostPieces.length > 2) {
+    request.uri = "/redirect.min.html";
   }
 
   return request;

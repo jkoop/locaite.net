@@ -1,5 +1,7 @@
 var cookie = null;
 var copiedChipTimeouts = [];
+const privacyPolicy =
+  "Privacy: locaite.net is a static site. None of your data is stored by locaite.net.";
 
 function updatePrefixesTable() {
   if (cookie !== null && cookie == document.cookie) return; // nothing to do; avoid interrupting the user filling out the form to save a prefix
@@ -294,34 +296,6 @@ function save(event) {
 
 function hashChange() {
   if (location.hash == "#privacy") {
-    document.querySelector("details").open = true;
-    document.getElementById("privacy").style.backgroundColor = "#ff0";
+    alert(privacyPolicy);
   }
-}
-
-if (prefix.length == 0) {
-  document.querySelector("div.card.main").style.display = "block";
-  updatePrefixesTable();
-  setInterval(updatePrefixesTable, 5000);
-
-  if (localStorage.openDetails === "false") {
-    document.querySelector("details").open = false;
-    document.getElementById("localLink").focus();
-  }
-
-  document
-    .querySelector("details")
-    .addEventListener(
-      "toggle",
-      (event) => (localStorage.openDetails = event.target.open.toString()),
-    );
-
-  hashChange();
-  window.addEventListener("hashchange", hashChange);
-} else {
-  document.getElementById("prefix").innerText = prefix;
-  document.getElementById("path").innerText = path;
-  document.querySelector("input#goto").placeholder =
-    `http://${prefix}.test:8080`;
-  document.querySelector("form.card.redirect").style.display = "block";
 }

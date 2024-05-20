@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Easily share local dev links across different domains and ports"
+    />
+    <meta name="author" content="Joe Koop &lt;https://github.com/jkoop&gt;" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1"
+    />
+
+    <title>Locaite.net</title>
+
+    <script>
+      const hostname = location.hostname.toLowerCase().split(".");
+      const prefix = hostname.slice(0, -2).join(".");
+      const goto = decodeURIComponent(
+        Object.fromEntries(
+          document.cookie.split("; ").map((c) => c.split("=")),
+        )[prefix] ?? "",
+      );
+      const path = location.pathname;
+
+      if (prefix.length > 0 && goto != "") {
+        location.href = goto + location.href.slice(location.origin.length + 1);
+      }
+    </script>
+
+    <link rel="preconnect" href="https://raw.githubusercontent.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      rel="icon"
+      href="https://raw.githubusercontent.com/Creators-of-Create/Create/d66170c8fed5d02ad46f44fd0e66685be88a3170/src/main/resources/assets/create/textures/item/polished_rose_quartz.png?_=copyright_2019_simibubi_mit_license"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://locaite.net/style.min.css?v=STYLE_HASH"
+    />
+
+    <script src="https://locaite.net/script.min.js?v=SCRIPT_HASH"></script>
+  </head>
+  <body>
+    <div id="bg"></div>
+    <div id="body">
+      <noscript class="card">JavaScript is required</noscript>
+
+      <form class="card" onsubmit="save(event)">
+        <a href="https://locaite.net">← Home</a>
+
+        <h2>Not configured</h2>
+        <p>
+          The link that you clicked on is intended to redirect you to your local
+          development site for the project "<code id="prefix"></code>".
+        </p>
+        <p>
+          Where do you want your browser to redirect you too? You can always
+          change this later.
+        </p>
+        <p class="nowrap">
+          <input id="goto" type="text" autofocus /><span id="path"></span>
+        </p>
+        <p style="margin-bottom: 4px">
+          <button>Save and continue</button>
+        </p>
+      </form>
+
+      <address>
+        <span
+          ><a target="_blank" href="https://github.com/jkoop/locaite.net"
+            >Locaite</a
+          >
+          &copy; 2024 jkoop (<a
+            href="https://github.com/jkoop/locaite.net/blob/master/README.md"
+            >all licenses</a
+          >)</span
+        >
+        <a href="https://locaite.net/#privacy">Privacy</a>
+      </address>
+    </div>
+
+    <script>
+      document.getElementById("prefix").innerText = prefix;
+      document.getElementById("path").innerText = path;
+      document.querySelector("input#goto").placeholder =
+        `http://${prefix}.test:8080`;
+    </script>
+  </body>
+</html>
