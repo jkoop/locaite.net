@@ -6,7 +6,7 @@ function handler(event) {
   const hostPieces = request.headers.host.value.split(".");
 
   if (hostPieces.length == 2 && request.uri == "/") {
-    request.uri = "/index.min.html";
+    request.uri = "/home.min.html";
   } else if (hostPieces.length > 2) {
     request.uri = "/redirect.min.html";
   }
