@@ -103,3 +103,63 @@ address * {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.chat-left,
+.chat-right {
+  margin-top: 12px;
+  width: fit-content;
+}
+
+.chat-left:first-child,
+.chat-right:first-child {
+  margin-top: 0;
+}
+
+.chat-author {
+  font-size: 14px;
+}
+
+.chat-message {
+  border-radius: 12px;
+  padding: 6px;
+}
+
+.chat-left .chat-message {
+  background-color: burlywood;
+  border-bottom-left-radius: 0;
+}
+
+.chat-right {
+  align-self: end;
+}
+
+.chat-right .chat-author {
+  text-align: right;
+}
+
+.chat-right .chat-message {
+  background-color: burlywood;
+  border-bottom-right-radius: 0;
+}
+
+.chat-message p:first-child {
+  margin-top: 0;
+}
+
+.chat-message p:last-child {
+  margin-bottom: 0;
+}
+
+.at {
+  background-color: #a00;
+  color: white;
+  border-radius: 4px;
+  padding: 1px 2px;
+  margin: -1px -2px;
+}

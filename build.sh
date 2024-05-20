@@ -21,6 +21,14 @@ if [ "$1" == "watch" ]; then
     build
     while inotifywait -e close_write index.html script.js style.css; do
         build
+
+        # for loval development; copy to where chrome can use for content override
+        cd dest/
+        mkdir -p static.locaite.net locaite.net myproject.locaite.net
+        cp style.min.css script.min.js static.locaite.net/
+        cp index.min.html locaite.net/index.html
+        cp index.min.html myproject.locaite.net/project/page
+        cd ../
     done
 else
     build

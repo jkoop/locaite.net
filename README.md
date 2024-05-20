@@ -1,17 +1,20 @@
 ### Locaite.net
 
-**Seamlessly Share Local Dev Links**
+Seamlessly share local dev links
 
-Locaite.net is the perfect solution for web developers looking to effortlessly share links to their local development environments, even if they use different domains and ports.
+See https://locaite.net for example usage.
 
-**How It Works:**
-1. **Replace the Domain**: Take the local address to your page, like `http://localhost:3000/project/page`.
-2. **Use a Custom Prefix**: Replace the domain and port with a custom prefix and `.locaite.net`, such as `http://myproject.locaite.net/project/page`.
-3. **Easy Setup**: The recipient configures Locaite.net once, mapping the prefix to their local setup.
+Locaite.net is a tool designed for web developers to facilitate sharing links to pages on each other's local development environments, even when they use different local domains and ports. This is achieved by replacing the domain name and port of a local address with a custom prefix followed by ".locaite.net". The chosen prefix should be concise and representative of the project name.
 
-**Why Locaite.net?**
-- **Streamline Collaboration**: No more manual adjustments to domain names and ports.
-- **Privacy First**: No data is stored by Locaite.net.
-- **Developer Friendly**: Quick, simple, and efficient.
+When another developer receives such a link and clicks on it, they are redirected to the corresponding page on their own local development site, assuming they have pre-configured Locaite.net appropriately. The configuration process is a one-time setup, and no data is stored by Locaite.net, ensuring privacy and security in the development workflow.
 
-Experience hassle-free link sharing with Locaite.net. Configure once, and you're set for smooth collaboration!
+This system streamlines collaboration among developers by providing a consistent method for accessing local resources without the need for manual adjustments to domain names and ports.
+
+---
+
+### Licenses
+
+- Locaite.net copyright 2024 Joe Koop; MIT license
+- [polished_rose_quartz.png][1] copyright 2019 simibubi MIT license
+
+[1]: https://github.com/Creators-of-Create/Create/blob/d66170c8fed5d02ad46f44fd0e66685be88a3170/src/main/resources/assets/create/textures/item/polished_rose_quartz.png

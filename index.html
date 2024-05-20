@@ -6,7 +6,7 @@
       name="description"
       content="Easily share local dev links across different domains and ports"
     />
-    <meta name="author" content="jkoop &lt;https://github.com/jkoop&gt;" />
+    <meta name="author" content="Joe Koop &lt;https://github.com/jkoop&gt;" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, minimum-scale=1"
@@ -68,29 +68,51 @@
           <summary><h2 style="display: inline">Locaite.net</h2></summary>
 
           <h3>Seamlessly share local dev links</h3>
-          <p>
-            Locaite.net is a tool designed for web developers to facilitate
-            sharing links to pages on each other's local development
-            environments, even when they use different local domains and ports.
-            This is achieved by replacing the domain name and port of a local
-            address with a custom prefix followed by ".locaite.net". The chosen
-            prefix should be concise and representative of the project name.
-          </p>
+          <p><b>Example usage</b> (an internal chat thread)</p>
 
-          <p>
-            When another developer receives such a link and clicks on it, they
-            are redirected to the corresponding page on their own local
-            development site, assuming they have pre-configured Locaite.net
-            appropriately. The configuration process is a one-time setup, and
-            <span id="privacy">no data is stored by Locaite.net</span>, ensuring
-            privacy and security in the development workflow.
-          </p>
+          <div class="chat-container">
+            <div class="chat-left">
+              <div class="chat-author">Project Manager</div>
+              <div class="chat-message">
+                <p><span class="at">@everyone</span></p>
+                <p>
+                  We've finally added that setting that you've always wanted.
+                  Thanks to Jeff, you can find it in the very big settings page.
+                </p>
+                <p>
+                  Dan, the link to your local site is
+                  <a href="http://localhost:8021/settings#cool-setting"
+                    >http://localhost:8021/<wbr />settings#<wbr />cool-<wbr />setting</a
+                  >. Ben, your's is
+                  <a href="http://localhost:5024/settings#cool-setting"
+                    >http://localhost:5024/<wbr />settings#<wbr />cool-<wbr />setting</a
+                  >. Sorry, John; I don't remember what port you host yours on.
+                </p>
+                <p>
+                  And all of our wonderful volunteers know where they keep their
+                  respective local sites.
+                </p>
+              </div>
+            </div>
 
-          <p>
-            This system streamlines collaboration among developers by providing
-            a consistent method for accessing local resources without the need
-            for manual adjustments to domain names and ports.
-          </p>
+            <div class="chat-right">
+              <div class="chat-author">
+                You (in response to Project Manager)
+              </div>
+              <div class="chat-message">
+                <p>
+                  Or you can just click this link, and tell it where to redirect
+                  you:
+                </p>
+                <p>
+                  <a
+                    href="https://cool-project.locaite.net/settings#cool-setting"
+                    >https://cool-project.locaite.net/<wbr />settings#<wbr />cool-<wbr />setting</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
         </details>
 
         <h3>Convert link</h3>
@@ -132,11 +154,12 @@
 
         <h2>Not configured</h2>
         <p>
-          It looks like you haven't configured the prefix "<code
-            id="prefix"
-          ></code
-          >" yet.<br />
-          Where do you want this link to redirect to for this web browser?
+          The link that you clicked on is intended to redirect to your local
+          development site for the project "<code id="prefix"></code>".
+        </p>
+        <p>
+          Where do you want your browser to redirect you too? You can always
+          change this later.
         </p>
         <p class="nowrap">
           <input id="goto" type="text" autofocus /><span id="path"></span>
@@ -148,10 +171,13 @@
 
       <address>
         <span
-          >Locaite &copy; 2024
-          <a target="_blank" href="https://github.com/jkoop/locaite.net"
-            >jkoop</a
-          ></span
+          ><a target="_blank" href="https://github.com/jkoop/locaite.net"
+            >Locaite</a
+          >
+          &copy; 2024 jkoop (<a
+            href="https://github.com/jkoop/locaite.net/blob/master/README.md"
+            >all licenses</a
+          >)</span
         >
         <a href="https://locaite.net/#privacy">Privacy</a>
       </address>
