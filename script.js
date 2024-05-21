@@ -291,7 +291,7 @@ function save(event) {
     new Date().getFullYear() + 100 + "",
   ).toUTCString();
   document.cookie = `${prefix}=${encodeURIComponent(target)};expires=${dateString};domain=.locaite.net;path=/`;
-  location.href = target + location.href.slice(location.origin.length);
+  location.href = target + location.href.slice(location.origin.length + 1);
 }
 
 function hashChange() {
